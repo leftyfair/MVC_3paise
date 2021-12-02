@@ -1,0 +1,15 @@
+{
+    "name": "mio/mvc_example02",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "leftyfair",
+            "email": "leftyfair@gmail.com"
+        }
+    ],
+    "require": {}
+}
