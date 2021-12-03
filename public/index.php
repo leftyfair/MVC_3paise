@@ -1,12 +1,27 @@
 <?php
-include dirname(__DIR__) . '/lib/test.lib.php';
-include dirname(__DIR__) . '/vendor/autoload.php';
 
 use app\controllers\AuthController;
 use app\controllers\SiteController;
 use app\core\Application;
 
-$app = new Application(dirname(__DIR__));
+include dirname(__DIR__) . '/lib/test.lib.php';
+include dirname(__DIR__) . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createMutable(dirname(__DIR__));
+$dotenv->load();
+
+
+
+$config = [
+    'db' => [
+        'dsn' => $_ENV['DB_DSN'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+    ]
+];
+
+$app = new Application(dirname(__DIR__), $config);
+
 $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
